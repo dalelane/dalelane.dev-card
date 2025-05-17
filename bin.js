@@ -6,7 +6,7 @@ const https = require('https');
 
 function urlGet(url) {
     return new Promise((resolve, reject) => {
-        https.get(url, (res) => {
+        https.get(url, { headers : { accept : '*/*' } }, (res) => {
             if (res.statusCode === 302 && res.headers.location) {
                 return resolve(urlGet(res.headers.location));
             }
@@ -118,7 +118,7 @@ function getRecentBlueskyPost() {
                     return FALLBACK_RESPONSE;
                 }
                 return decodeHtmlEntities(descriptionMatch[1]);
-                }
+            }
             catch {
                 return FALLBACK_RESPONSE;
             }
@@ -149,6 +149,7 @@ function wrap(str) {
     while (remaining.length > 0 && result.length < MAXLINES) {
         if (remaining.length <= LINELENGTH) {
             result.push(remaining);
+            remaining = "";
             break;
         }
         let splitAt = remaining.lastIndexOf(' ', LINELENGTH);

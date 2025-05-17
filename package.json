@@ -1,6 +1,6 @@
 {
   "name": "dalelane",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Dale Lane's terminal business card",
   "main": "bin.js",
   "bin": {
